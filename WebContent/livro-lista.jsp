@@ -57,7 +57,7 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-								<a href="/crud-livros/livro/novo" class="btn btn-outline-primary">+ Livro</a>
+								<a href="/crud-livros/livro/novo" class="btn btn-outline-dark">+ Livro</a>
 							</div>
                         </div>
                         <div class="card mb-4">

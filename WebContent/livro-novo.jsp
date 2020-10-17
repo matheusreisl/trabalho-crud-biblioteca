@@ -56,7 +56,7 @@
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-								<a href="/crud-livros/livro/lista"  class="btn btn-outline-primary">Lista de Livros</a>
+								<a href="/crud-livros/livro/lista"  class="btn btn-outline-dark">Lista de Livros</a>
 							</div>
                         </div>
                         
@@ -108,7 +108,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group mt-4 mb-0">
-													<input class="btn btn-primary btn-block" type="submit" value="Salvar">
+													<input class="btn btn-dark btn-block" type="submit" value="Salvar">
 											</div>
                                         </form>
                             </div>
