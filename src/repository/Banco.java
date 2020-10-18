@@ -1,15 +1,95 @@
 package repository;
-
 import java.util.ArrayList;
 import java.util.List;
 import entities.Livro;
+import javax.persistence.*;
 
 public class Banco {
 
 	private static List<Livro> listaLivro= new ArrayList<>();
-	private static Integer codigo = 1;
-		
-	public void salvaLivro(Livro obj) {
+	//private static Integer codigo = 1;
+	
+	EntityManagerFactory factory;
+	EntityManager manager;
+	
+	public Banco() {
+		factory= Persistence.createEntityManagerFactory("c");
+		manager = factory.createEntityManager();
+	}
+
+	public List<Livro> getListLivro() {
+		try{
+			manager.getTransaction().begin();
+			Query consulta = manager.createQuery("SELECT livros FROM Livro");
+			List<Livro> lista = consulta.getResultList();
+			setListLivro(lista);
+		}
+		finally {
+			emf.close();
+		}
+		return listLivro;
+	}
+	
+	public static void setListLivro(List<Livro> listLivro) {
+		Banco.listLivro = listLivro;
+	}
+	
+	public void salvaLivro(Livro livros) {
+		try {
+			manager.getTransaction().begin();
+			Livro response = manager.merge(livros);
+			System.out.println(response.getId());;
+			manager.getTransaction().commit();
+		}
+		finally {
+			factory.close();
+		}
+	}
+	
+	public void atualizaLivro(Livro livros) {
+		try {
+			manager.getTransaction().begin();
+			Query delete = manager.createQuery("UPDATE livros FROM livros WHERE id = " +  livros.getId());
+			delete.executeUpdate();
+			manager.getTransaction().commit();
+		}
+		finally {
+			manager.close();
+		}
+	}
+	
+	public Integer getTamanhoListaLivro() {
+		return this.listLivro.size();
+	}
+	
+	public Livro getLivroById(Integer id) {
+		Livro localiza = new Livro();
+		for(Livro livro : Banco.listLivro) {
+			if(livro.getId() == id) {
+				localiza = livro;
+			}
+		}
+		return localiza;
+	}
+	
+	public void deletaLivro(Integer id) {
+		try {
+			manager.getTransaction().begin();
+			Query delete = manager.createNativeQuery("DELETE livros FROM livros WHERE id = " +  id);
+			delete.executeUpdate();
+			manager.getTransaction().commit();
+		}
+		finally {
+			manager.close();
+		}
+	}
+}
+	
+	
+	
+	
+/*	
+ public void salvaLivro(Livro obj) {
 		if(obj.getId()>0) 
 			atualizaLivro(obj);
 		else {
@@ -57,6 +137,5 @@ public class Banco {
 			}
 		}
 	}
-	
-
 }
+*/
