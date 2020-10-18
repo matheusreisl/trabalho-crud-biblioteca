@@ -1,7 +1,5 @@
 package controller;
 
-
-
 import java.io.IOException;
 import java.util.List;
 
@@ -12,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import entities.Livro;
 import repository.Banco;
 
-/**
- * Servlet implementation class ListaCliente
- */
 @WebServlet("/livro/lista")
 public class ListaLivro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Banco banco = new Banco();
-		List<Livro> lista = banco.getListaLivro();
+		List<Livro> lista = banco.getListLivro();
 		
 		for (Livro livro: lista) {
 			System.out.println(livro.getId() + " - " + livro.getTitulo());
