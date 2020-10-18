@@ -96,7 +96,7 @@
 														<a href="/crud-livros/livro/editar?id=${liv.id}"> 
 															<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 														</a>
-														<a href="#"> 
+														<a href="#" class="deleta" id="${liv.id}"> 
 															<i class="fa fa-trash" aria-hidden="true"></i>
 														</a>
 													</td>   
@@ -126,5 +126,23 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="/crud-livros/assets/demo/datatables-demo.js"></script>
+        <script>  	
+       		$('.deleta').bind('click',function(){
+       			var id = this.id;
+       			if(confirm("Deseja deletar o livro de código " + id + "?")){
+       				$.ajax({
+       					url: "/crud-livros/livro/deletar",
+       					type: "post",
+       					data: {
+       						id: id,
+       					},
+       					success: function(data){
+       						alert('Livro deletado com sucesso!');
+       						location.reload();
+       					}
+       				});
+       			}
+       		});
+       	</script>
     </body>
 </html>
