@@ -1,13 +1,27 @@
 package entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="livros")
 public class Livro {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id; 
-	private String titulo; 
+	
+	@Column
+	private String titulo;
+	@Column
 	private String autor; 
+	@Column
 	private String isbn;
+	@Column
 	private Double preco;
 	
 	public Integer getId() {

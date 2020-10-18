@@ -6,17 +6,20 @@
       version="2.0">
 
   <!-- Unidade de persistencia -->
-  <persistence-unit name="sebo" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="crud-livros" transaction-type="RESOURCE_LOCAL">
     <!-- Implementação do JPA -->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <!-- Lista de entidades - Colocar as classes do sistema que serão mapeadas para o banco de dados -->
-    <class>app.entities.Livro</class>
+    <class>entities.Livro</class>
+    
+    
     <properties>
       <!-- Propriedades JDBC -->
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sebo?useLegacyDatetimeCode=false;serverTimezone=UTC"/>
-      <property name="javax.persistence.jdbc.user" value="toor"/>
-      <property name="javax.persistence.jdbc.password" value="password"/>
+      <property name="javax.persistence.jdbc.driver" value="salt.db.elephantsql.com (salt-01)"/>
+      <property name="javax.persistence.jdbc.url" value="postgres://bfzdoeho:x2It-IGOC74nMsVPSh027U5oqkHjESyW@salt.db.elephantsql.com:5432/bfzdoeho"/>
+      <property name="javax.persistence.jdbc.user" value="bfzdoeho"/>
+      <property name="javax.persistence.jdbc.password" value="x2It-IGOC74nMsVPSh027U5oqkHjESyW"/>
+      
       <!-- Configurações específicas do Hibernate -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
