@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 public class Banco {
 
-	private static List<Livro> listaLivro= new ArrayList<>();
+	private static List<Livro> listaLivro = new ArrayList<>();
 	//private static Integer codigo = 1;
 	
 	EntityManagerFactory factory;
@@ -25,13 +25,13 @@ public class Banco {
 			setListLivro(lista);
 		}
 		finally {
-			emf.close();
+			factory.close();
 		}
-		return listLivro;
+		return listaLivro;
 	}
 	
 	public static void setListLivro(List<Livro> listLivro) {
-		Banco.listLivro = listLivro;
+		Banco.listaLivro = listaLivro;
 	}
 	
 	public void salvaLivro(Livro livros) {
@@ -59,12 +59,12 @@ public class Banco {
 	}
 	
 	public Integer getTamanhoListaLivro() {
-		return this.listLivro.size();
+		return this.listaLivro.size();
 	}
 	
 	public Livro getLivroById(Integer id) {
 		Livro localiza = new Livro();
-		for(Livro livro : Banco.listLivro) {
+		for(Livro livro : Banco.listaLivro) {
 			if(livro.getId() == id) {
 				localiza = livro;
 			}
