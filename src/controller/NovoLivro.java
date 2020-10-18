@@ -1,11 +1,8 @@
 package controller;
 
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,31 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import entities.Livro;
 import repository.Banco;
 
-/**
- * Servlet implementation class NovoCliente
- */
+
 @WebServlet("/livro/novo")
 public class NovoLivro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/livro-novo.jsp");
 		rd.forward(request, response);
 	}
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		
-		String id = request.getParameter("id");
+		/*String id = request.getParameter("id");
 		if (id.isEmpty()) {
 			id = "0";
-		}
+		}*/
+		
+		String id = request.getParameter("id");
 		String titulo = request.getParameter("titulo");
 		String autor = request.getParameter("autor");
 		String isbn = request.getParameter("isbn");
@@ -63,20 +62,19 @@ public class NovoLivro extends HttpServlet {
 			request.setAttribute("isbn", isbn);
 			request.setAttribute("preco", preco);
 		
-		}
-		else {
-	
+		} else {
+					
+			Banco banco = new Banco();
 			Livro livro = new Livro();
 			livro.setId(Integer.valueOf(id));
 			livro.setTitulo(titulo);
 			livro.setAutor(autor);
 			livro.setIsbn(isbn);
 			livro.setPreco(Double.valueOf(preco));
+			if(!id.isEmpty()) {
+				livro.setId(Integer.parseInt(id));
+			}
 			
-			
-			
-			Banco banco = new Banco();		
-			//livro.setId(banco.getTamanhoListaLivro() + 1);
 			banco.salvaLivro(livro);			
 			
 			System.out.println("Cadastro realizado com sucesso!!!");
