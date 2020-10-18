@@ -1,5 +1,8 @@
+package repository;
+
 import java.util.ArrayList;
 import java.util.List;
+import entities.Livro;
 
 public class Banco {
 
@@ -46,4 +49,14 @@ public class Banco {
 		}
 		return localiza;
 	}
+	
+	public void deletaLivro(Integer id) {
+		for( int i = 0 ; i <= Banco.listaLivro.size(); i++) {
+			if(Banco.listaLivro.get(i).getId() == id) {
+				Banco.listaLivro.remove(i);
+			}
+		}
+	}
+	
+
 }
