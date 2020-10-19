@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Livro;
 import repository.Banco;
 
-/**
- * Servlet implementation class EditaLivro
- */
+//Criação da classe para editar um livro
 @WebServlet("/livro/editar")
 public class EditaLivro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,8 +20,11 @@ public class EditaLivro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("id");
+		//Instanciando o banco
 		Banco banco = new Banco();
+		//Recebendo os dados do livro - identificado pelo id
 		Livro livro = banco.getLivroById(Integer.valueOf(id));
+		//Editando os atributos do livro
 		request.setAttribute("id", livro.getId());
 		request.setAttribute("titulo", livro.getTitulo());
 		request.setAttribute("autor", livro.getAutor());

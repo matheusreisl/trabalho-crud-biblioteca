@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import repository.Banco;
 
+//Criação da classe para deletar um livro
 @WebServlet("/livro/deletar")
 public class DeletaLivro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,7 +18,9 @@ public class DeletaLivro extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("id");
+		//Instanciando o banco
 		Banco banco = new Banco();
+		//Deletando o livro com o id puxado
 		banco.deletaLivro(Integer.valueOf(id));
 	}
 

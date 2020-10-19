@@ -4,19 +4,23 @@ import java.util.List;
 import entities.Livro;
 import javax.persistence.*;
 
+//Criação da classe Banco
 public class Banco {
 
 	private static List<Livro> listaLivro = new ArrayList<>();
 	//private static Integer codigo = 1;
 	
+	//Instanciando o criador de entidade
 	EntityManagerFactory emf;
+	//Instanciando o editor de entidade
 	EntityManager em;
 	
 	public Banco() {
 		emf= Persistence.createEntityManagerFactory("livros");
 		em = emf.createEntityManager();
 	}
-
+	
+	//Puxando do banco todos os livros salvos
 	public List<Livro> getListaLivro() {
 		try{
 			em.getTransaction().begin();
@@ -29,11 +33,13 @@ public class Banco {
 		}
 		return listaLivro;
 	}
-
+	
+	//Definindo a lista de livros
 	public static void setListaLivro(List<Livro> listaLivro) {
 		Banco.listaLivro = listaLivro;
 	}
-
+	
+	//Salvando o livro no banco
 	public void salvaLivro(Livro livro) {
 		try {
 			em.getTransaction().begin();
@@ -45,6 +51,7 @@ public class Banco {
 		}
 	}
 	
+	//Atualizando o livro no banco
 	public void atualizaLivro(Livro livro) {
 		try {
 			em.getTransaction().begin();
@@ -56,7 +63,7 @@ public class Banco {
 		}
 	} 
 
-	
+	//Buscando livro no banco pelo id
 	public Livro getLivroById(Integer id) {
 		Livro localiza = new Livro();
 		for(Livro livro : Banco.listaLivro) {
@@ -67,6 +74,7 @@ public class Banco {
 		return localiza;
 	}
 
+	//Deletando livro no banco
 	public void deletaLivro(Integer id) {
 		try {	
 			Livro livroEncontrado = em.find(Livro.class, id);  

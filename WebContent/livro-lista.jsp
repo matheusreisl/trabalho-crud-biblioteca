@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>IFSP Admin</title>
+        <title>IFSP CRUD-LIVROS</title>
         <link href="/crud-livros/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -112,9 +112,9 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Prof. Aldo Paim</div>
+                            <div class="text-muted">Atividade feita por: Matheus Reis Luz SP3015092 e Renan do Lago Tiengo SP3014215</div>
                             <div>
-                                Versão 1.0
+                                V. 1.0
                             </div>
                         </div>
                     </div>

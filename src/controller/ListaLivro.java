@@ -17,13 +17,16 @@ import javax.persistence.Persistence;
 import entities.Livro;
 import repository.Banco;
 
+//Criação de classe para listar todos os livros na base de dados
 @WebServlet("/livro/lista")
 public class ListaLivro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//Instanciando o banco
 		Banco banco = new Banco();
+		//Salvando na lista todos os livros dentro do banco
 		List<Livro> lista = banco.getListaLivro();
 		
 		for (Livro livro: lista) {

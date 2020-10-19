@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//Criando a classe livros - se tornará uma tabela
 @Entity
 @Table(name="livros")
 public class Livro {
