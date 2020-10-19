@@ -41,7 +41,7 @@ public class NovoLivro extends HttpServlet {
 		String autor = request.getParameter("autor");
 		String isbn = request.getParameter("isbn");
 		String preco = request.getParameter("preco");
-		
+		boolean novoCadastro = true;
 		
 		List<String> mensagens  = new ArrayList<String>();
 		
@@ -62,23 +62,25 @@ public class NovoLivro extends HttpServlet {
 			request.setAttribute("isbn", isbn);
 			request.setAttribute("preco", preco);
 		
-		} else {
-					
+		} else {					
 			Banco banco = new Banco();
 			Livro livro = new Livro();
+			
 			//livro.setId(Integer.valueOf(id));
 			livro.setTitulo(titulo);
 			livro.setAutor(autor);
 			livro.setIsbn(isbn);
 			livro.setPreco(Double.valueOf(preco));
+			
 			if(!id.isEmpty()) {
 				livro.setId(Integer.parseInt(id));
+				novoCadastro = false;
+				banco.atualizaLivro(livro);
+			}else {
+				banco.salvaLivro(livro);
 			}
 			
-			banco.salvaLivro(livro);			
-			
-			System.out.println("Cadastro realizado com sucesso!!!");
-			request.setAttribute("sucess", "Cadastro realizado com sucesso!");
+			request.setAttribute("sucess", novoCadastro ? "Cadastro realizado com sucesso!":"Atualização realizada com sucesso!" );
 		}
 	
 		doGet(request, response);

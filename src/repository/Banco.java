@@ -37,8 +37,7 @@ public class Banco {
 	public void salvaLivro(Livro livro) {
 		try {
 			em.getTransaction().begin();
-			Livro response = em.merge(livro);
-			System.out.println(response.getId());;
+			em.persist(livro);
 			em.getTransaction().commit();
 		}
 		finally {
@@ -49,18 +48,14 @@ public class Banco {
 	public void atualizaLivro(Livro livro) {
 		try {
 			em.getTransaction().begin();
-			Query delete = em.createQuery("UPDATE livro FROM livro WHERE id = " +  livro.getId());
-			delete.executeUpdate();
+			em.merge(livro);
 			em.getTransaction().commit();
 		}
 		finally {
 			em.close();
 		}
 	} 
-	
-	public Integer getTamanhoListaLivro() {
-		return this.listaLivro.size();
-	}
+
 	
 	public Livro getLivroById(Integer id) {
 		Livro localiza = new Livro();
@@ -73,10 +68,10 @@ public class Banco {
 	}
 
 	public void deletaLivro(Integer id) {
-		try {
+		try {	
+			Livro livroEncontrado = em.find(Livro.class, id);  
 			em.getTransaction().begin();
-			Query delete = em.createNativeQuery("DELETE livro FROM livro WHERE id = " +  id);
-			delete.executeUpdate();
+			em.remove(livroEncontrado);
 			em.getTransaction().commit();
 		}
 		finally {
