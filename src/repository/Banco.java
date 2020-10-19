@@ -9,54 +9,54 @@ public class Banco {
 	private static List<Livro> listaLivro = new ArrayList<>();
 	//private static Integer codigo = 1;
 	
-	EntityManagerFactory factory;
-	EntityManager manager;
+	EntityManagerFactory emf;
+	EntityManager em;
 	
 	public Banco() {
-		factory= Persistence.createEntityManagerFactory("c");
-		manager = factory.createEntityManager();
+		emf= Persistence.createEntityManagerFactory("livros");
+		em = emf.createEntityManager();
 	}
 
-	public List<Livro> getListLivro() {
+	public List<Livro> getListaLivro() {
 		try{
-			manager.getTransaction().begin();
-			Query consulta = manager.createQuery("SELECT livros FROM Livro");
+			em.getTransaction().begin();
+			Query consulta = em.createQuery("SELECT livro FROM Livro livro");
 			List<Livro> lista = consulta.getResultList();
-			setListLivro(lista);
+			setListaLivro(lista);
 		}
 		finally {
-			factory.close();
+			emf.close();
 		}
 		return listaLivro;
 	}
-	
-	public static void setListLivro(List<Livro> listLivro) {
+
+	public static void setListaLivro(List<Livro> listaLivro) {
 		Banco.listaLivro = listaLivro;
 	}
-	
-	public void salvaLivro(Livro livros) {
+
+	public void salvaLivro(Livro livro) {
 		try {
-			manager.getTransaction().begin();
-			Livro response = manager.merge(livros);
+			em.getTransaction().begin();
+			Livro response = em.merge(livro);
 			System.out.println(response.getId());;
-			manager.getTransaction().commit();
+			em.getTransaction().commit();
 		}
 		finally {
-			factory.close();
+			emf.close();
 		}
 	}
 	
-	public void atualizaLivro(Livro livros) {
+	public void atualizaLivro(Livro livro) {
 		try {
-			manager.getTransaction().begin();
-			Query delete = manager.createQuery("UPDATE livros FROM livros WHERE id = " +  livros.getId());
+			em.getTransaction().begin();
+			Query delete = em.createQuery("UPDATE livro FROM livro WHERE id = " +  livro.getId());
 			delete.executeUpdate();
-			manager.getTransaction().commit();
+			em.getTransaction().commit();
 		}
 		finally {
-			manager.close();
+			em.close();
 		}
-	}
+	} 
 	
 	public Integer getTamanhoListaLivro() {
 		return this.listaLivro.size();
@@ -71,71 +71,18 @@ public class Banco {
 		}
 		return localiza;
 	}
-	
+
 	public void deletaLivro(Integer id) {
 		try {
-			manager.getTransaction().begin();
-			Query delete = manager.createNativeQuery("DELETE livros FROM livros WHERE id = " +  id);
+			em.getTransaction().begin();
+			Query delete = em.createNativeQuery("DELETE livro FROM livro WHERE id = " +  id);
 			delete.executeUpdate();
-			manager.getTransaction().commit();
+			em.getTransaction().commit();
 		}
 		finally {
-			manager.close();
+			em.close();
 		}
 	}
+	
+	
 }
-	
-	
-	
-	
-/*	
- public void salvaLivro(Livro obj) {
-		if(obj.getId()>0) 
-			atualizaLivro(obj);
-		else {
-			obj.setId(getProximoCodigo());
-			listaLivro.add(obj);
-		}
-		
-	}
-	
-	private void atualizaLivro(Livro obj) {
-		
-		for(int i = 0; i <Banco.listaLivro.size(); i++) {
-			if(Banco.listaLivro.get(i).getId() == obj.getId()) {
-				Banco.listaLivro.set(i, obj);
-			}
-		}		
-	}
-	
-	private Integer getProximoCodigo() {
-		return codigo++;
-	}
-
-	public List<Livro> getListaLivro(){
-		return Banco.listaLivro;
-	}
-	
-	public Integer getTamanhoListaLivro() {
-		return Banco.listaLivro.size();
-	}
-	
-	public Livro getLivrobyId(Integer id) {
-		Livro localiza = new Livro();
-		for(Livro livro: Banco.listaLivro) {
-			if(livro.getId() == id) {
-				localiza = livro;
-			}
-		}
-		return localiza;
-	}
-	
-	public void deletaLivro(Integer id) {
-		for( int i = 0 ; i <= Banco.listaLivro.size(); i++) {
-			if(Banco.listaLivro.get(i).getId() == id) {
-				Banco.listaLivro.remove(i);
-			}
-		}
-	}
-}
-*/

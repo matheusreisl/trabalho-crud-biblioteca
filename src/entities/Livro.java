@@ -17,10 +17,13 @@ public class Livro {
 	
 	@Column
 	private String titulo;
+	
 	@Column
 	private String autor; 
+	
 	@Column
 	private String isbn;
+	
 	@Column
 	private Double preco;
 	
@@ -53,9 +56,5 @@ public class Livro {
 	}
 	public void setPreco(Double preco) {
 		this.preco = preco;
-	}
-
-
-	
-	
+	}	
 }

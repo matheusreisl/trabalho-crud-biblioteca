@@ -66,7 +66,7 @@ public class NovoLivro extends HttpServlet {
 					
 			Banco banco = new Banco();
 			Livro livro = new Livro();
-			livro.setId(Integer.valueOf(id));
+			//livro.setId(Integer.valueOf(id));
 			livro.setTitulo(titulo);
 			livro.setAutor(autor);
 			livro.setIsbn(isbn);

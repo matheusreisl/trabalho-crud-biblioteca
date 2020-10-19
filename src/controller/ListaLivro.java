@@ -24,7 +24,7 @@ public class ListaLivro extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Banco banco = new Banco();
-		List<Livro> lista = banco.getListLivro();
+		List<Livro> lista = banco.getListaLivro();
 		
 		for (Livro livro: lista) {
 			System.out.println(livro.getId() + " - " + livro.getTitulo());
